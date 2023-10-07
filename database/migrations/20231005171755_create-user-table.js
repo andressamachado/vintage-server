@@ -11,6 +11,7 @@ exports.up = function (knex) {
     table.string("password").notNullable();
     table.string("phone");
     table.string("address");
+    table.boolean("isAdmin").defaultTo(0); // not admin by default
   });
 };
 
