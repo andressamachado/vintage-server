@@ -51,8 +51,8 @@ function validateUserLogin(req, res, next) {
 
   // Check for presence of required fields
   const missingFields = [];
-  if (email) missingFields.push("- email");
-  if (password) missingFields.push("- password");
+  if (!email) missingFields.push("- email");
+  if (!password) missingFields.push("- password");
 
   if (missingFields.length > 0) {
     return res.status(400).json({
