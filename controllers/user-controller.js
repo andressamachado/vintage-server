@@ -78,6 +78,8 @@ const createUser = async (req, res) => {
   }
 };
 
+// GET http://127.0.0.1:5050/api/users/login
+// Returns a JWT token for the authenticated user.
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -90,16 +92,41 @@ const loginUser = async (req, res) => {
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
     if (!isPasswordCorrect) return res.status(400).send("Invalid password");
 
-    // create jwt for authenticated user
+    // Email and Password confirmed. Create JWT for authenticated user
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      // payload:
+      { id: user.id, email: user.email, isAdmin: user.isAdmin },
+      // secretOrPrivateKey:
       process.env.JWT_SECRET,
+      // option:
       { expiresIn: "8h" }
     );
 
+    // return token
     res.json({ token: token });
   } catch (error) {
     res.status(500).json({ error: "Could not log in" });
+  }
+};
+
+// GET http://127.0.0.1:5050/api/users/profile
+// Returns the user profile data from the database.
+const getUserProfile = async (req, res) => {
+  // No auth header provided
+  if (!req.headers.authorization) return res.status(401).send("Please login");
+
+  // Grab token from auth header
+  const authHeader = req.headers.authorization;
+  const authToken = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(authToken, process.env.JWT_SECRET);
+    const user = await knex("users").where({ id: decoded.id }).first();
+
+    // user logged in
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(400).send("Can't fetch the user profile");
   }
 };
 
@@ -108,4 +135,5 @@ module.exports = {
   getUserById,
   createUser,
   loginUser,
+  getUserProfile,
 };
