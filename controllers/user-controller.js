@@ -48,7 +48,21 @@ const getUserById = async (req, res) => {
   }
 };
 
+// POST http://127.0.0.1:5050/api/users/
+// Returns the newly created user data object inserted in the database.
+const createUser = async (req, res) => {
+  try {
+    const newUser = req.body;
+    const [addedUser] = await knex("users").insert(newUser).returning("*");
+
+    res.status(201).json(addedUser);
+  } catch (error) {
+    res.status(500).json({ error: "Could not add user to the database" });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
+  createUser,
 };
