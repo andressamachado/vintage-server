@@ -1,5 +1,6 @@
 // (input) validation for User data
 
+// Register validation
 function validateUser(req, res, next) {
   const user = req.body;
 
@@ -44,6 +45,26 @@ function validateUser(req, res, next) {
   next();
 }
 
+// Login validation
+function validateUserLogin(req, res, next) {
+  const { email, password } = req.body;
+
+  // Check for presence of required fields
+  const missingFields = [];
+  if (email) missingFields.push("- email");
+  if (password) missingFields.push("- password");
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      message: "Please enter the required fields:",
+      errors: missingFields,
+    });
+  }
+
+  next();
+}
+
 module.exports = {
   validateUser,
+  validateUserLogin,
 };

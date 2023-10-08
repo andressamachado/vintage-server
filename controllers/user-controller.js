@@ -55,7 +55,7 @@ const getUserById = async (req, res) => {
 // POST http://127.0.0.1:5050/api/users/register
 // Returns the newly created user data object inserted in the database.
 const createUser = async (req, res) => {
-  const { irst_name, last_name, email, password, phone, address, isAdmin } =
+  const { first_name, last_name, email, password, phone, address, isAdmin } =
     req.body;
 
   // encrypt password and updates user`s password value
@@ -78,8 +78,34 @@ const createUser = async (req, res) => {
   }
 };
 
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if email is in the database
+    const user = await knex("users").where({ email: email }).first();
+    if (!user) return res.status(400).send("Invalid email");
+
+    // Check if the password matches the one in the database
+    const isPasswordCorrect = bcrypt.compareSync(password, user.password);
+    if (!isPasswordCorrect) return res.status(400).send("Invalid password");
+
+    // create jwt for authenticated user
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "8h" }
+    );
+
+    res.json({ token: token });
+  } catch (error) {
+    res.status(500).json({ error: "Could not log in" });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  loginUser,
 };
