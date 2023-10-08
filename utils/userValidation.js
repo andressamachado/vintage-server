@@ -14,7 +14,7 @@ function validateUser(req, res, next) {
     /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
   // Regex for phone validation
-  // +1 (xxx) xxx-xxxx
+  // eg. +1 (xxx) xxx-xxxx
   const phoneFormat =
     /^\+?(\d{1})\)?[ ]?\(?(\d{3})\)?[-  ]?(\d{3})[- ]?(\d{4})$/;
 

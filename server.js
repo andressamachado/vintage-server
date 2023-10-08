@@ -15,6 +15,7 @@ app.use(express.json());
 // mount router modules
 app.use("/api/users", userRoutes);
 
+// start server
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
