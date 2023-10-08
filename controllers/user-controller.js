@@ -1,4 +1,8 @@
 require("dotenv").config();
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const knex = require("knex")(require("../database/knexfile"));
 
 // GET http://127.0.0.1:5050/api/users/
@@ -48,12 +52,25 @@ const getUserById = async (req, res) => {
   }
 };
 
-// POST http://127.0.0.1:5050/api/users/
+// POST http://127.0.0.1:5050/api/users/register
 // Returns the newly created user data object inserted in the database.
 const createUser = async (req, res) => {
+  const { irst_name, last_name, email, password, phone, address, isAdmin } =
+    req.body;
+
+  // encrypt password and updates user`s password value
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  const userToAdd = {
+    ...req.body,
+    password: hashedPassword,
+  };
+
   try {
-    const newUser = req.body;
-    const [addedUser] = await knex("users").insert(newUser).returning("*");
+    const [id] = await knex("users").insert(userToAdd).returning("*");
+    const [addedUser] = await knex
+      .select("first_name", "last_name", "email", "phone", "address", "isAdmin")
+      .from("users")
+      .where("id", id);
 
     res.status(201).json(addedUser);
   } catch (error) {
