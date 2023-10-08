@@ -74,11 +74,15 @@ const createUser = async (req, res) => {
 
     res.status(201).json(addedUser);
   } catch (error) {
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.status(400).json({ error: "Email already exists" });
+    }
+
     res.status(500).json({ error: "Could not add user to the database" });
   }
 };
 
-// GET http://127.0.0.1:5050/api/users/login
+// POST http://127.0.0.1:5050/api/users/login
 // Returns a JWT token for the authenticated user.
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -102,7 +106,7 @@ const loginUser = async (req, res) => {
       { expiresIn: "8h" }
     );
 
-    // return token
+    // returns a token
     res.json({ token: token });
   } catch (error) {
     res.status(500).json({ error: "Could not log in" });
