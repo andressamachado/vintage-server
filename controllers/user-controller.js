@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const knex = require("knex")(require("../database/knexfile"));
@@ -82,7 +81,7 @@ const createUser = async (req, res) => {
   }
 };
 
-// POST http://127.0.0.1:5050/api/users/login
+// POST http://127.0.0.1:5050/api/users/signin
 // Returns a JWT token for the authenticated user.
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -90,7 +89,7 @@ const loginUser = async (req, res) => {
   try {
     // Check if email is in the database
     const user = await knex("users").where({ email: email }).first();
-    if (!user) return res.status(400).send("Invalid email");
+    if (!user) return res.status(400).send("E-mail not found");
 
     // Check if the password matches the one in the database
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
@@ -109,7 +108,7 @@ const loginUser = async (req, res) => {
     // returns a token
     res.json({ token: token });
   } catch (error) {
-    res.status(500).json({ error: "Could not log in" });
+    res.status(500).send({ error: "Could not sign in" });
   }
 };
 
