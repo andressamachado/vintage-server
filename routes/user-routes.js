@@ -11,8 +11,8 @@ router.route("/:userId").get(userController.getUserById);
 // eg. POST http://127.0.0.1:5050/api/users/register
 router.route("/register").post(validateUser, userController.createUser);
 
-// eg. POST http://127.0.0.1:5050/api/users/login
-router.route("/login").post(validateUserLogin, userController.loginUser);
+// eg. POST http://127.0.0.1:5050/api/users/signin
+router.route("/signin").post(validateUserLogin, userController.loginUser);
 
 // eg. GET http://127.0.0.1:5050/api/users/profile
 router.route("/profile").get(userController.getUserProfile);
