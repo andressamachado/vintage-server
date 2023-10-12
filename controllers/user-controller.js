@@ -81,7 +81,7 @@ const createUser = async (req, res) => {
   }
 };
 
-// POST http://127.0.0.1:5050/api/users/signin
+// POST http://127.0.0.1:5050/api/users/sign-in
 // Returns a JWT token for the authenticated user.
 const loginUser = async (req, res) => {
   const { email, password } = req.body;

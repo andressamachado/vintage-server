@@ -24,16 +24,16 @@ function validateUser(req, res, next) {
   Object.keys(user).forEach((key) => {
     if (key === "isAdmin") return;
 
-    if (!user[key]) missingFields.push(`- ${key}`);
+    if (!user[key]) missingFields.push(`${key}`);
   });
 
   // Check fields with enforced formats
   if (user.email && !mailFormat.test(user.email)) {
-    missingFields.push("- email is not in proper format");
+    missingFields.push("E-mail is not in proper format");
   }
 
   if (user.phone && !phoneFormat.test(user.phone)) {
-    missingFields.push("- phone is not in proper format");
+    missingFields.push("Phone is not in proper format");
   }
 
   if (missingFields.length > 0) {
@@ -50,15 +50,12 @@ function validateUserLogin(req, res, next) {
   const { email, password } = req.body;
 
   // Check for presence of required fields
-  const missingFields = [];
-  if (!email) missingFields.push("- email");
-  if (!password) missingFields.push("- password");
+  const missingFields = ["Please enter the required fields: "];
+  if (!email) missingFields.push("[E-mail]");
+  if (!password) missingFields.push(" [Password ]");
 
-  if (missingFields.length > 0) {
-    return res.status(400).json({
-      message: "Please enter the required fields:",
-      errors: missingFields,
-    });
+  if (missingFields.length > 1) {
+    return res.status(400).send(missingFields);
   }
 
   next();
