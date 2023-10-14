@@ -15,7 +15,7 @@ const getAllUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({
-      message: "Error occurred while fetching inventory data",
+      message: "Error occurred while fetching users data",
       error: error.message,
     });
   }
