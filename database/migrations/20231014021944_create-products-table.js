@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.string("title").notNullable();
     table.binary("image").notNullable();
     table.string("description");
-    table.string("price").notNullable().unique();
+    table.string("price").notNullable();
     table.boolean("sold").defaultTo(0); // available by default
   });
 };
@@ -18,5 +18,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable("inventory");
+  return knex.schema.dropTable("products");
 };
