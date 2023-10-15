@@ -9,6 +9,7 @@ exports.up = function (knex) {
     table.binary("image").notNullable();
     table.string("description");
     table.string("price").notNullable();
+    table.string("category").notNullable();
     table.boolean("sold").defaultTo(0); // available by default
   });
 };

@@ -1,8 +1,6 @@
 // Import dotenv to process environment variables from `.env` file.
 require("dotenv").config({ path: "../.env" });
 
-// console.log(process.env.DB_HOST, "DB_HOST");
-
 module.exports = {
   client: process.env.DB_CLIENT,
   connection: {
