@@ -25,10 +25,8 @@ const uploadProduct = async (req, res) => {
   try {
     const [productToAdd] = await knex
       .insert({
-        title: name,
         image: img,
-        description: "description",
-        price: "12",
+        ...req.body,
       })
       .into("products");
 
@@ -37,9 +35,9 @@ const uploadProduct = async (req, res) => {
       .from("products")
       .where({ id: productToAdd });
 
-    const { title, image, description, price } = data;
+    const { title, image, description, price, id } = data;
 
-    const newProduct = { title, image, description, price };
+    const newProduct = { title, image, description, price, id };
 
     return res.status(200).json(newProduct);
   } catch (error) {
