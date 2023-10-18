@@ -3,7 +3,7 @@
 Every year half a million tons of textiles are dumped by Canadians and this number can be even higher in countries like the USA where 11.3 Million tons are dumped every single year. 
 Those textiles will end up in countries like India, Chile, Kenya, and Ghana, causing an environmental crisis, especially in those countries. 
 
-> Vintage Culture emerged with the purpose of making thrifting part of our shopping routines. To increase the life span of our clothes by putting them on the market again after it does not fit us anymore.
+> Vintage Culture emerged with the purpose of making thrifting part of our shopping routines. To increase the lifespan of our clothes by putting them on the market again after they do not fit us anymore.
 > Our goal here is to make an application as practical as possible, easy to navigate through, and intuitive so it can be incorporated into our lives with ease. 
 
 ## Tech Stack 
@@ -51,8 +51,8 @@ To register as a vendor, for now, it has to be directly from an HTTP request.*
 *Request`s body example:*
 
 ```{
-    "email": "jschuppe28@instock.com",
-    "password": "9876"
+    "email": "user@email.com",
+    "password": "1234"
 }
 ```
 
@@ -69,6 +69,8 @@ Perform the following commands inside the ```database``` folder:
 4. run `knex migrate:latest` to create the tables on your database. 
 
 5. run  `knex seed:run` to populate your tables with initial values.
+
+On the root folder:
 
 6. run the server using ```npm start```
 
