@@ -1,10 +1,14 @@
 # vintage-server
 
+This is the Server side of the Vintage Culture project. The Frontend can be found (here)[https://github.com/andressamachado/vintage-client]
+
 Every year half a million tons of textiles are dumped by Canadians and this number can be even higher in countries like the USA where 11.3 Million tons are dumped every single year. 
 Those textiles will end up in countries like India, Chile, Kenya, and Ghana, causing an environmental crisis, especially in those countries. 
 
 > Vintage Culture emerged with the purpose of making thrifting part of our shopping routines. To increase the lifespan of our clothes by putting them on the market again after they do not fit us anymore.
 > Our goal here is to make an application as practical as possible, easy to navigate through, and intuitive so it can be incorporated into our lives with ease. 
+
+A little presentation about the project: https://vintage-culture.my.canva.site/presentation :) 
 
 ## Tech Stack 
 ![652581_code_command_develop_javascript_language_icon](https://github.com/andressamachado/vintage-server/assets/37486615/180017ef-7812-41e0-90b6-4105d5c1e161)
