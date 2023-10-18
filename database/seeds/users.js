@@ -12,8 +12,8 @@ exports.seed = async function (knex) {
       id: 1,
       first_name: "Admin",
       last_name: "Admin",
-      email: "admin@vintage.shop",
-      password: "123",
+      email: "admin@vintage.com",
+      password: "$2b$10$5GIDvDiKBaf1OSd524tMY.Vbw4z7EbIhQbPoEiEc9bGf2LZoi1Ny.",
       phone: "1234567890",
       address: "1234 Main St",
       isAdmin: 1, // yes
