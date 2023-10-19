@@ -22,15 +22,15 @@ Those textiles will end up in countries like India, Chile, Kenya, and Ghana, cau
 ## Endpoints [ WIP ]
 #### Get a list of users registered (for test purposes)
 
-```GET http://127.0.0.1:5050/api/users/```
+```GET /api/users/```
 
 #### Get a single user instance selected by the id
 
-```GET http://127.0.0.1:5050/api/users/:userId```
+```GET /api/users/:userId```
 
 #### Register a new user 
 
-```POST http://127.0.0.1:5050/api/users/register```
+```POST /api/users/register```
 
 *note: by default, the user is registered as a buyer ( value of 0 ). 
 To register as a vendor, for now, it has to be directly from an HTTP request.*
@@ -51,7 +51,7 @@ To register as a vendor, for now, it has to be directly from an HTTP request.*
 
 #### Sign in 
 
-```POST http://127.0.0.1:5050/api/users/sign-in```
+```POST /api/users/sign-in```
 
 *Request`s body example:*
 
